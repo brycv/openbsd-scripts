@@ -19,14 +19,16 @@
 ################################################################################
 #
 # Title: build_stable.sh
-# Version: 0.5
+# Version: 0.5.1
 #
 ################################################################################
 #
-# If you need to adjust the LOGPATH, this is where to do it. This script
-# is designed to be used before you run the build_release.sh.
+# If you need to adjust the LOGPATH, this is where to do it. This script is
+# designed to be used before you run the build_release.sh. Also, by default,
+# build the GENERIC kernel. Change the KERNEL variable to GENERIC.MP if needed.
 
 LOGPATH=/logs
+KERNEL="GENERIC"
 
 ################################################################################
 
@@ -38,8 +40,8 @@ XLOG=${LOGPATH}/log_build_xenocara_${TIMESTAMP}
 
 buildkernel() {
 	cd /usr/src/sys/arch/amd64/conf
-	/usr/sbin/config GENERIC >> ${KLOG} 2>&1
-	cd /usr/src/sys/arch/amd64/compile/GENERIC
+	/usr/sbin/config KERNEL >> ${KLOG} 2>&1
+	cd /usr/src/sys/arch/amd64/compile/KERNEL
 	make clean >> ${KLOG} 2>&1
 	make >> ${KLOG} 2>&1
 	make install >> ${KLOG} 2>&1
