@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: build_release.sh
-# Version: 0.5.1
+# Version: 0.5.2
 #
 ################################################################################
 #
@@ -39,24 +39,24 @@ mkdir -p ${DESTDIR} ${RELEASEDIR} ${LOGPATH}
 
 TIMESTAMP=`date +%Y%m%d%H%M%S`
 
-rlog=${LOGPATH}/log_build_release_${TIMESTAMP}
-xrlog=${LOGPATH}/log_build_xrelease_${TIMESTAMP}
+RLOG=${LOGPATH}/log_build_release_${TIMESTAMP}
+XRLOG=${LOGPATH}/log_build_xrelease_${TIMESTAMP}
 
-buildrel() {
+buildrelease() {
 	cd /usr/src/etc
-	make release >> ${rlog} 2>&1
+	make release >> ${RLOG} 2>&1
 	return 0
 }
 
-buildxrel() {
+buildxrelease() {
 	cd /usr/xenocara
-	make release >> ${xrlog} 2>&1
+	make release >> ${XRLOG} 2>&1
 	return 0
 }
 
 main() {
-	buildrel
-	buildxrel
+	buildrelease
+	buildxrelease
 	sh /usr/src/distrib/sets && sh checkflist
 	cd /usr/rel
 	ls -nT > index.txt
