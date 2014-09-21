@@ -19,13 +19,16 @@
 ################################################################################
 #
 # Title: build_stable.sh
-# Version: 0.5.1
+# Version: 0.5.2
 #
 ################################################################################
 #
 # If you need to adjust the LOGPATH, this is where to do it. This script is
-# designed to be used before you run the build_release.sh. Also, by default,
-# build the GENERIC kernel. Change the KERNEL variable to GENERIC.MP if needed.
+# designed to be used before you run the build_release.sh script. It also makes
+# things easier to checkout the source tree with the cvsn.sh script as well. By
+# default, build the GENERIC kernel. Change the KERNEL variable to GENERIC.MP
+# (typically the default on anything recent except for virtual machines) if
+# needed.
 
 LOGPATH=/logs
 KERNEL="GENERIC"
