@@ -19,13 +19,15 @@
 ################################################################################
 #
 # Title: build_release.sh
-# Version: 0.5
+# Version: 0.5.1
 #
 ################################################################################
 #
 # Variables for release building. If you need to adjust the LOGPATH, this is
 # where to do it. This script assumes you have already run the build_stable.sh
-# script as well.
+# script as well. As with build_release.sh, this script also assumes it is
+# being run as root. This is probably not the best practice and some changes
+# should be made in the future to change this.
 
 export DESTDIR=/usr/dest
 export RELEASEDIR=/usr/rel

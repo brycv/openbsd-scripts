@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: cvsn.sh
-# Version: 0.5.1
+# Version: 0.5.2
 #
 # This script simply checks out the src, xenocara, and ports trees for the
 # version of OpenBSD set by REL_VERSION.
@@ -29,7 +29,8 @@
 # You should choose an anoncvs mirror outside the US unless you are in the US.
 # See http://www.openbsd.org/anoncvs.html for a list of mirrors. Change the
 # CVSROOT variable as needed. Also, change the REL_VERSION to the version of
-# the OpenBSD tree you would like to checkout.
+# the OpenBSD tree you would like to checkout. This script is designed to be
+# run as root which may not be the best way of doing things.
 
 CVSROOT="anoncvs@anoncvs3.usa.openbsd.org:/cvs"
 REL_VERSION="OPENBSD_5_5"

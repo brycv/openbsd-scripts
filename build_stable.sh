@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: build_stable.sh
-# Version: 0.5.2
+# Version: 0.5.3
 #
 ################################################################################
 #
@@ -28,7 +28,9 @@
 # things easier to checkout the source tree with the cvsn.sh script as well. By
 # default, build the GENERIC kernel. Change the KERNEL variable to GENERIC.MP
 # (typically the default on anything recent except for virtual machines) if
-# needed.
+# needed. Currently, this script assumes it is being run from root which may
+# not be the best approach. Additional changes would be required to modify this
+# behavior.
 
 LOGPATH=/logs
 KERNEL="GENERIC"
