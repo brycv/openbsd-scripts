@@ -1,7 +1,9 @@
 openbsd-scripts
 ===============
 
-Simple OpenBSD shell scripts for various purposes
+This is my personal collection of simple OpenBSD shell scripts for various
+purposes. Right now, all three are designed to be run as root but this probably
+will change in the future.
 
 ### cvsn.sh
 
