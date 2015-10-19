@@ -18,11 +18,13 @@
 #
 ################################################################################
 #
-# Title: cvsn.sh
-# Version: 0.5.4
+# Title: cvs-rel.sh
+# Version: 0.5.5
 #
 # This script simply checks out the src, xenocara, and ports trees for the
-# version of OpenBSD set by REL_VERSION.
+# version of OpenBSD set by REL_VERSION. This script is designed to be used 
+# with a specific release rather than -current. The separate cvs-cur.sh is 
+# designed to be used with -current.
 #
 ################################################################################
 #
