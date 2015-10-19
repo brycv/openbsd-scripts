@@ -18,7 +18,7 @@
 #
 ################################################################################
 #
-# Title: cvs-cur.sh
+# Title: cvs_cur.sh
 # Version: 0.5.5
 #
 # This script simply checks out the src, xenocara, and ports trees for the

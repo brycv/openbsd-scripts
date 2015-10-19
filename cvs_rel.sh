@@ -18,7 +18,7 @@
 #
 ################################################################################
 #
-# Title: cvs-rel.sh
+# Title: cvs_rel.sh
 # Version: 0.5.5
 #
 # This script simply checks out the src, xenocara, and ports trees for the
