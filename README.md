@@ -5,11 +5,11 @@ This is my personal collection of simple OpenBSD shell scripts for various
 purposes. Right now, all three are designed to be run as root but this probably
 will change in the future.
 
-### cvs-cur.sh
+### cvs_cur.sh
 
 This script simply checks out the -current version of the OpenBSD source tree.
 
-### cvs-rel.sh
+### cvs_rel.sh
 
 This script simply checks out whatever version of the OpenBSD source tree is
 specified in the variables of the script.
