@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: build_stable.sh
-# Version: 0.5.4
+# Version: 0.5.5
 #
 ################################################################################
 #
@@ -33,7 +33,7 @@
 # behavior.
 
 LOGPATH=/logs
-KERNEL="GENERIC"
+KERNEL=GENERIC
 
 ################################################################################
 
@@ -43,10 +43,12 @@ KLOG=${LOGPATH}/log_build_kernel_${TIMESTAMP}
 WLOG=${LOGPATH}/log_build_world_${TIMESTAMP}
 XLOG=${LOGPATH}/log_build_xenocara_${TIMESTAMP}
 
+mkdir -p ${LOGPATH}
+
 buildkernel() {
 	cd /usr/src/sys/arch/amd64/conf
-	/usr/sbin/config KERNEL >> ${KLOG} 2>&1
-	cd /usr/src/sys/arch/amd64/compile/KERNEL
+	/usr/sbin/config ${KERNEL} >> ${KLOG} 2>&1
+	cd /usr/src/sys/arch/amd64/compile/${KERNEL}
 	make clean >> ${KLOG} 2>&1
 	make >> ${KLOG} 2>&1
 	make install >> ${KLOG} 2>&1
