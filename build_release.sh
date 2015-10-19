@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: build_release.sh
-# Version: 0.5.3
+# Version: 0.5.5
 #
 ################################################################################
 #
@@ -35,12 +35,12 @@ LOGPATH=/logs
 
 ################################################################################
 
-mkdir -p ${DESTDIR} ${RELEASEDIR} ${LOGPATH}
-
 TIMESTAMP=`date +%Y%m%d%H%M%S`
 
 RLOG=${LOGPATH}/log_build_release_${TIMESTAMP}
 XRLOG=${LOGPATH}/log_build_xrelease_${TIMESTAMP}
+
+mkdir -p ${DESTDIR} ${RELEASEDIR} ${LOGPATH}
 
 buildrelease() {
 	cd /usr/src/etc
@@ -60,6 +60,7 @@ main() {
 	sh /usr/src/distrib/sets && sh checkflist
 	cd /usr/rel
 	ls -nT > index.txt
+	sha256 & > SHA256
 }
 
 main &
