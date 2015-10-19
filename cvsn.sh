@@ -32,8 +32,8 @@
 # the OpenBSD tree you would like to checkout. This script is designed to be
 # run as root which may not be the best way of doing things.
 
-CVSROOT="anoncvs@anoncvs3.usa.openbsd.org:/cvs"
-REL_VERSION="OPENBSD_5_5"
+CVSROOT="anoncvs@cvs.anoncvs.com:/cvs"
+REL_VERSION="OPENBSD_5_8"
 
 ################################################################################
 
