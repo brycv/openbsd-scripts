@@ -2,7 +2,7 @@
 #
 ################################################################################
 #
-# Copyright (c) 2013-2014, Bryan Vyhmeister <bryan@bsdjournal.net>
+# Copyright (c) 2013-2015, Bryan Vyhmeister <bryan@bsdjournal.net>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: cvsn.sh
-# Version: 0.5.2
+# Version: 0.5.4
 #
 # This script simply checks out the src, xenocara, and ports trees for the
 # version of OpenBSD set by REL_VERSION.

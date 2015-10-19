@@ -2,7 +2,7 @@
 #
 ################################################################################
 #
-# Copyright (c) 2013-2014, Bryan Vyhmeister <bryan@bsdjournal.net>
+# Copyright (c) 2013-2015, Bryan Vyhmeister <bryan@bsdjournal.net>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: build_stable.sh
-# Version: 0.5.3
+# Version: 0.5.4
 #
 ################################################################################
 #
