@@ -7,7 +7,7 @@ will change in the future.
 
 ### cvsn.sh
 
-This script simple checks out whatever version of the OpenBSD source tree is
+This script simply checks out whatever version of the OpenBSD source tree is
 specified in the variables of the script.
 
 ### build_stable.sh
