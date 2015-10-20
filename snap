@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: snap
-# Version: 0.5.2
+# Version: 0.5.3
 #
 ################################################################################
 #
@@ -72,12 +72,14 @@ usage() {
 	echo ""
 	echo "Usage:"
 	echo ""
+	echo "   snap new"
+	echo "      Open ftp session and download newest snapshot to"
+	echo "      current directory"
 	echo "   snap upgrade"
 	echo "      Upgrade your system with the latest binary snapshot"
+	echo"       in /root/snapshots/new"
 	echo "   snap config"
 	echo "      Upgrade your system config files with sysmerge"
-	echo "   snap new"
-	echo "      Open ftp session and download newest snapshot to current directory"
 	echo ""
 }
 
