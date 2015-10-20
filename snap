@@ -1,0 +1,96 @@
+#!/bin/sh
+#
+################################################################################
+#
+# Copyright (c) 2014-2015, Bryan Vyhmeister <bryan@bsdjournal.net>
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+# REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+# AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+# INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+# LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+# OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+# PERFORMANCE OF THIS SOFTWARE.
+#
+################################################################################
+#
+# Title: snap
+# Version: 0.5.0
+#
+################################################################################
+#
+# The purpose of this script is to be placed in /root/bin (assuming PATH is
+# updated for ~/bin) and executed with various options that allow upgrading
+# your OpenBSD -current system to the latest snapshot. More functionality is
+# planned but currently the script allows for downloading of the latest
+# snapshot and then installing that snapshot as well as running sysmerge.
+# The directory structure I use for this is /root/snapshots/${DATE} with the
+# most current snapshot symlinked to /root/snapshots/new. This script assumes
+# that /root/snapshots/new is the location where the snapshot to be installed
+# is located.
+#
+################################################################################
+#
+# ASSUMPTIONS:
+# 1. Newest snapshot is in /root/snapshots/new (change snap below if different)
+# 2. You are running the bsd.mp kernel
+# 3. The ${version} variable should be set below to the current version
+#
+# WARNING: ONLY FOR EXPERIENCED USERS
+#
+################################################################################
+
+version=58
+snap=/root/snapshots/new
+
+binupgrade() {
+	cp ${snap}/bsd /bsd.sp
+	cp ${snap}/bsd.rd /bsd.rd
+	cp ${snap}/bsd.mp /bsd
+	echo "New kernels installed in root"
+
+	for set in base comp game man xbase xfont xserv xshare
+	do
+		tar -C / -zxphf ${snap}/${set}${version}.tgz
+	done
+	echo "Updated sets installed"
+	return 1
+}
+
+ftpsnap() {
+	ftp -ia ftp://ftp.openbsd.org/pub/OpenBSD/snapshots/`uname -m`/*
+	return 1
+}
+
+usage() {
+	echo "ONLY FOR EXPERIENCED USERS! USE AT YOUR OWN RISK!"
+	echo ""
+	echo "Usage:"
+	echo ""
+	echo "   snap upgrade"
+	echo "      Upgrade your system with the latest binary snapshot"
+	echo "   snap config"
+	echo "      Upgrade your system config files with sysmerge"
+	echo "   snap new"
+	echo "      Open ftp session and download newest snapshot"
+	echo ""
+}
+
+case $1 in
+	upgrade)
+		binupgrade
+	;;
+	config)
+		sysmerge
+	;;
+	new)
+		ftpsnap
+	;;
+	*)
+		usage
+	;;
+esac
