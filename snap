@@ -19,13 +19,13 @@
 ################################################################################
 #
 # Title: snap
-# Version: 0.5.0
+# Version: 0.5.1
 #
 ################################################################################
 #
 # The purpose of this script is to be placed in /root/bin (assuming PATH is
 # updated for ~/bin) and executed with various options that allow upgrading
-# your OpenBSD -current system to the latest snapshot. More functionality is
+# your OpenBSD-current system to the latest snapshot. More functionality is
 # planned but currently the script allows for downloading of the latest
 # snapshot and then installing that snapshot as well as running sysmerge.
 # The directory structure I use for this is /root/snapshots/${DATE} with the
