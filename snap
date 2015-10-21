@@ -77,7 +77,7 @@ usage() {
 	echo "      current directory"
 	echo "   snap upgrade"
 	echo "      Upgrade your system with the latest binary snapshot"
-	echo"       in /root/snapshots/new"
+	echo "      in /root/snapshots/new"
 	echo "   snap config"
 	echo "      Upgrade your system config files with sysmerge"
 	echo ""
