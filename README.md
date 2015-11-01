@@ -3,7 +3,8 @@ openbsd-scripts
 
 This is my personal collection of simple OpenBSD shell scripts for various
 purposes. Right now, all three are designed to be run as root but this probably
-will change in the future.
+will change in the future. The scripts are rather simple and will be improved 
+as needed in the future.
 
 ### cvs_cur.sh
 
