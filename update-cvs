@@ -1,0 +1,64 @@
+#!/bin/sh
+#
+################################################################################
+#
+# Copyright (c) 2013-2015, Bryan Vyhmeister <bryan@bsdjournal.net>
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+# REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+# AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+# INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+# LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+# OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+# PERFORMANCE OF THIS SOFTWARE.
+#
+################################################################################
+#
+# Title: update-cvs
+# Version: 0.7
+#
+# This script simply checks out the src, xenocara, ports trees or all three for 
+# OpenBSD-current. This script is designed to be used with -current rather 
+# than a specific release. This script can be used to checkout a new tree or 
+# update an existing tree.
+#
+################################################################################
+#
+# You should choose an anoncvs mirror outside the US unless you are in the US.
+# See http://www.openbsd.org/anoncvs.html for a list of mirrors. Change the
+# CVSROOT variable as needed. This script is designed to be run as root which 
+# may not be the best way of doing things.
+
+CVSROOT="anoncvs@cvs.anoncvs.com:/cvs"
+
+################################################################################
+
+export CVSROOT
+
+case $1 in
+	all)
+		cd /usr
+		env CVSROOT=${CVSROOT} cvs -q get -P src
+		env CVSROOT=${CVSROOT} cvs -q get -P ports
+		env CVSROOT=${CVSROOT} cvs -q get -P xenocara
+	;;
+	src)
+		cd /usr
+		env CVSROOT="anoncvs@cvs.anoncvs.com:/cvs" cvs -q get -P src
+	;;
+	ports)
+		cd /usr
+		env CVSROOT="anoncvs@cvs.anoncvs.com:/cvs" cvs -q get -P ports
+	;;
+	xenocara)
+		cd /usr
+		env CVSROOT="anoncvs@cvs.anoncvs.com:/cvs" cvs -q get -P xenocara
+	;;
+	*)
+		echo "Usage: all|src|ports|xenocara"
+	;;
+esac

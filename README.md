@@ -32,3 +32,9 @@ This script is intended to be run from /bin/root with ~/bin appearing in PATH.
 It provides a quick means to download the latest OpenBSD-current snapshot and
 then install that snapshot to your system. This is not designed to be used with
 a standard OpenBSD release but with OpenBSD-current.
+
+### update-cvs
+
+This script is intended to both fetch the OpenBSD src, ports, and/or xenocara 
+trees from CVS. It is currently configured for OpenBSD-current but could be 
+modified to also support a release.
