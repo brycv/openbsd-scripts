@@ -1,0 +1,116 @@
+#!/bin/sh
+#
+################################################################################
+#
+# Copyright (c) 2013-2015, Bryan Vyhmeister <bryan@bsdjournal.net>
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+# REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+# AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+# INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+# LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+# OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+# PERFORMANCE OF THIS SOFTWARE.
+#
+################################################################################
+#
+# Title: build-current
+# Version: 0.6
+#
+################################################################################
+#
+# This script is designed to rebuild your current system with a GENERIC.MP 
+# kernel and/or then rebuild the entire world and/or xenocara.
+
+KERNEL=GENERIC.MP
+
+################################################################################
+
+TIMESTAMP=`date +%Y%m%d%H%M%S`
+
+mkdir -p ${LOGPATH}
+
+buildkernel() {
+	cd /usr/src/sys/arch/amd64/conf
+	/usr/sbin/config ${KERNEL} 2>&1
+	cd /usr/src/sys/arch/amd64/compile/${KERNEL}
+	make clean 2>&1
+	make all 2>&1
+	make install 2>&1
+	echo ""
+	echo "     kernel built and installed"
+	echo ""
+	return 0
+}
+
+buildworld() {
+	rm -rf /usr/obj/*
+	cd /usr/src
+	make obj 2>&1
+	cd /usr/src/etc && env DESTDIR=/ make distrib-dirs 2>&1
+	cd /usr/src && make build 2>&1
+	echo ""
+	echo "     world built and installed"
+	echo ""
+	return 0
+}
+
+buildxenocara() {
+	cd /usr/xenocara
+	rm -rf /usr/xobj/*
+	make bootstrap 2>&1
+	make obj 2>&1
+	make build 2>&1
+	echo ""
+	echo "     xenocara built and installed"
+	echo ""
+	return 0
+}
+
+buildall() {
+	buildkernel
+	buildworld
+	buildxenocara
+	echo ""
+	echo "     Build of kernel, world, and xenocara 
+	echo "     Started: ${TIMESTAMP}"
+	echo "     Completed: `date +%Y%m%d%H%M%S`"
+	echo ""
+	return 0
+}
+
+buildboth() {
+	buildkernel
+	buildworld
+	echo ""
+	echo "     Build of kernel and world
+	echo "     Started: ${TIMESTAMP}"
+	echo "     Completed: `date +%Y%m%d%H%M%S`"
+	echo ""
+	return 0
+}
+
+case $1 in
+	kernel)
+		buildkernel
+	;;
+	world)
+		buildworld
+	;;
+	both)
+		buildboth
+	;;
+	xenocara)
+		buildxenocara
+	;;
+	all)
+		buildall
+	;;
+	*)
+		echo "Usage: build-current kernel|world|both|xenocara|all"
+	;;
+esac
