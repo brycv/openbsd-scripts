@@ -74,7 +74,7 @@ buildall() {
 	buildworld
 	buildxenocara
 	echo ""
-	echo "     Build of kernel, world, and xenocara 
+	echo "     Build of kernel, world, and xenocara"
 	echo "     Started: ${TIMESTAMP}"
 	echo "     Completed: `date +%Y%m%d%H%M%S`"
 	echo ""
@@ -85,7 +85,7 @@ buildboth() {
 	buildkernel
 	buildworld
 	echo ""
-	echo "     Build of kernel and world
+	echo "     Build of kernel and world"
 	echo "     Started: ${TIMESTAMP}"
 	echo "     Completed: `date +%Y%m%d%H%M%S`"
 	echo ""
