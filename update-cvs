@@ -48,15 +48,15 @@ case $1 in
 	;;
 	src)
 		cd /usr
-		env CVSROOT="anoncvs@cvs.anoncvs.com:/cvs" cvs -q get -P src
+		env CVSROOT=${CVSROOT} cvs -q get -P src
 	;;
 	ports)
 		cd /usr
-		env CVSROOT="anoncvs@cvs.anoncvs.com:/cvs" cvs -q get -P ports
+		env CVSROOT=${CVSROOT} cvs -q get -P ports
 	;;
 	xenocara)
 		cd /usr
-		env CVSROOT="anoncvs@cvs.anoncvs.com:/cvs" cvs -q get -P xenocara
+		env CVSROOT=${CVSROOT} cvs -q get -P xenocara
 	;;
 	*)
 		echo "Usage: all|src|ports|xenocara"
