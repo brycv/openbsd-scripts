@@ -45,6 +45,7 @@ case $1 in
 		env CVSROOT=${CVSROOT} cvs -q get -P src
 		env CVSROOT=${CVSROOT} cvs -q get -P ports
 		env CVSROOT=${CVSROOT} cvs -q get -P xenocara
+		env CVSROOT=${CVSROOT} cvs -q get -P www
 	;;
 	src)
 		cd /usr
@@ -57,6 +58,10 @@ case $1 in
 	xenocara)
 		cd /usr
 		env CVSROOT=${CVSROOT} cvs -q get -P xenocara
+	;;
+	www)
+		cd /usr
+		env CVSROOT=${CVSROOT} cvs -q get -P www
 	;;
 	*)
 		echo "Usage: all|src|ports|xenocara"
