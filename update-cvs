@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: update-cvs
-# Version: 0.7
+# Version: 0.8
 #
 # This script simply checks out the src, xenocara, ports trees or all three for 
 # OpenBSD-current. This script is designed to be used with -current rather 
@@ -64,6 +64,6 @@ case $1 in
 		env CVSROOT=${CVSROOT} cvs -q get -P www
 	;;
 	*)
-		echo "Usage: all|src|ports|xenocara"
+		echo "Usage: all|src|ports|xenocara|www"
 	;;
 esac
