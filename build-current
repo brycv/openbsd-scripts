@@ -19,12 +19,12 @@
 ################################################################################
 #
 # Title: build-current
-# Version: 0.6.1
+# Version: 0.6.5
 #
 ################################################################################
 #
 # This script is designed to rebuild your current system with a GENERIC.MP 
-# kernel and/or then rebuild the entire world and/or xenocara.
+# kernel and/or then rebuild the entire userland and/or xenocara.
 
 KERNEL=GENERIC.MP
 
@@ -45,14 +45,14 @@ buildkernel() {
 	return 0
 }
 
-buildworld() {
+builduserland() {
 	rm -rf /usr/obj/*
 	cd /usr/src
 	make obj 2>&1
 	cd /usr/src/etc && env DESTDIR=/ make distrib-dirs 2>&1
 	cd /usr/src && make build 2>&1
 	echo ""
-	echo "     world built and installed"
+	echo "     userland built and installed"
 	echo ""
 	return 0
 }
@@ -71,10 +71,10 @@ buildxenocara() {
 
 buildall() {
 	buildkernel
-	buildworld
+	builduserland
 	buildxenocara
 	echo ""
-	echo "     Build of kernel, world, and xenocara"
+	echo "     Build of kernel, userland, and xenocara"
 	echo "     Started: ${TIMESTAMP}"
 	echo "     Completed: `date +%Y%m%d%H%M%S`"
 	echo ""
@@ -83,9 +83,9 @@ buildall() {
 
 buildboth() {
 	buildkernel
-	buildworld
+	builduserland
 	echo ""
-	echo "     Build of kernel and world"
+	echo "     Build of kernel and userland"
 	echo "     Started: ${TIMESTAMP}"
 	echo "     Completed: `date +%Y%m%d%H%M%S`"
 	echo ""
@@ -96,8 +96,8 @@ case $1 in
 	kernel)
 		buildkernel
 	;;
-	world)
-		buildworld
+	userland)
+		builduserland
 	;;
 	both)
 		buildboth
@@ -109,6 +109,6 @@ case $1 in
 		buildall
 	;;
 	*)
-		echo "Usage: build-current kernel|world|both|xenocara|all"
+		echo "Usage: build-current kernel|userland|both|xenocara|all"
 	;;
 esac
