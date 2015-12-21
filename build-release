@@ -1,0 +1,78 @@
+#!/bin/sh
+#
+################################################################################
+#
+# Copyright (c) 2013-2015, Bryan Vyhmeister <bryan@bsdjournal.net>
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+# REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+# AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+# INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+# LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+# OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+# PERFORMANCE OF THIS SOFTWARE.
+#
+################################################################################
+#
+# Title: build-release
+# Version: 0.6.0
+#
+################################################################################
+#
+# Variables for release building. This script assumes you have already run the
+# build-current or build stable some other way. As with build-release, this
+# script also assumes it is being run as root. This is probably not the best
+# practice and some changes should be made in the future to change this.
+
+export DESTDIR=/usr/dest
+export RELEASEDIR=/usr/rel
+
+################################################################################
+
+TIMESTAMP=`date +%Y%m%d%H%M%S`
+
+buildrelease() {
+	cd /usr/src/etc && make release
+	echo ""
+	echo "     release built"
+	echo ""
+	return 0
+}
+
+buildxrelease() {
+	cd /usr/xenocara && make release
+	echo ""
+	echo "    xenocara release built"
+	echo ""
+	return 0
+}
+
+buildall() {
+	buildrelease
+	buildxrelease
+	echo ""
+	echo "     Build of release and xenocara release"
+	echo "     Started: ${TIMESTAMP}"
+	echo "     Completed: `date +%Y%m%d%H%M%S`"
+	echo ""
+	return 0
+}
+
+case $1 in
+	release)
+		buildrelease
+	;;
+	xrelease|x)
+		buildxrelease
+	;;
+	all)
+		buildall
+	;;
+	*)
+		echo "Usage: build-release release|xrelease|all"
+	;;
+esac
