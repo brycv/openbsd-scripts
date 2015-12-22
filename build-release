@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: build-release
-# Version: 0.6.1
+# Version: 0.6.2
 #
 ################################################################################
 #
@@ -62,6 +62,12 @@ buildall() {
 	echo ""
 	return 0
 }
+finalrelease() {
+	cd /usr/src/distrib/sets && sh checkflist
+	cd /usr/rel
+	ls -nT > index.txt
+	sha256 * > SHA256
+}
 
 case $1 in
 	release)
@@ -72,6 +78,10 @@ case $1 in
 	;;
 	all)
 		buildall
+		finalrelease
+	;;
+	finish)
+		finalrelease	
 	;;
 	*)
 		echo "Usage: build-release release|xrelease|all"
