@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: build-release
-# Version: 0.6.2
+# Version: 0.6.3
 #
 ################################################################################
 #
@@ -47,7 +47,7 @@ buildrelease() {
 buildxrelease() {
 	cd /usr/xenocara && make release
 	echo ""
-	echo "    xenocara release built"
+	echo "     xenocara release built"
 	echo ""
 	return 0
 }
