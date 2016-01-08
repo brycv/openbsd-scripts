@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# expects VERS for version as in VERS=58 and also SETS and an absolute path
+
+rm /obsd ; ln /bsd /obsd && cp ${SETS}/bsd.mp /nbsd && mv /nbsd /bsd
+cp ${SETS}/bsd.rd /
+cp ${SETS}/bsd /bsd.sp
+
+cp /sbin/reboot /sbin/oreboot
+tar -C / -xzphf ${SETS}/xserv${VERS}.tgz
+tar -C / -xzphf ${SETS}/xfont${VERS}.tgz
+tar -C / -xzphf ${SETS}/xshare${VERS}.tgz
+tar -C / -xzphf ${SETS}/xbase${VERS}.tgz
+tar -C / -xzphf ${SETS}/game${VERS}.tgz
+tar -C / -xzphf ${SETS}/comp${VERS}.tgz
+tar -C / -xzphf ${SETS}/man${VERS}.tgz
+tar -C / -xzphf ${SETS}/base${VERS}.tgz
+
+echo "Use /sbin/oreboot to reboot now"
