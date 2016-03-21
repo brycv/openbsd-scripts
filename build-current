@@ -39,6 +39,9 @@ buildkernel() {
 	make clean 2>&1
 	make all 2>&1
 	make install 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
 	echo ""
 	echo "     kernel built and installed"
 	echo ""
@@ -51,6 +54,9 @@ builduserland() {
 	make obj 2>&1
 	cd /usr/src/etc && env DESTDIR=/ make distrib-dirs 2>&1
 	cd /usr/src && make build 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
 	echo ""
 	echo "     userland built and installed"
 	echo ""
@@ -63,6 +69,9 @@ buildxenocara() {
 	make bootstrap 2>&1
 	make obj 2>&1
 	make build 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
 	echo ""
 	echo "     xenocara built and installed"
 	echo ""
