@@ -49,6 +49,7 @@ version=59
 snap=/root/snapshots/new
 
 binupgrade() {
+	cp /sbin/reboot /sbin/oreboot
 	cp ${snap}/bsd /bsd.sp
 	cp ${snap}/bsd.rd /bsd.rd
 	cp ${snap}/bsd.mp /bsd
