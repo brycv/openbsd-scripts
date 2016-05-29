@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: build-current
-# Version: 0.6.5
+# Version: 0.6.6
 #
 ################################################################################
 #
@@ -37,7 +37,13 @@ buildkernel() {
 	/usr/sbin/config ${KERNEL} 2>&1
 	cd /usr/src/sys/arch/amd64/compile/${KERNEL}
 	make clean 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
 	make all 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
 	make install 2>&1
 	if [ $? -ne 0 ]; then
 		break
@@ -67,6 +73,9 @@ buildxenocara() {
 	cd /usr/xenocara
 	rm -rf /usr/xobj/*
 	make bootstrap 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
 	make obj 2>&1
 	make build 2>&1
 	if [ $? -ne 0 ]; then
