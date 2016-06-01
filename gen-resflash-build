@@ -1,0 +1,69 @@
+#!/bin/sh
+
+extractsets() {
+	for SETS in base man
+	do
+		tar -C ${BUILD_PATH} -zxvphf ${SETS_PATH}/${SETS}${VERS}.tgz
+		tar -C ${BUILD_PATH} -zxvphf ${BUILD_PATH}/var/sysmerge/etc.tgz
+	done
+	cp ${SETS_PATH}/bsd.mp ${BUILD_PATH}/bsd
+	cp -R /root/resflash-files/${TYPE}/root/.ssh ${BUILD_PATH}/root/
+	cp /root/resflash-files/${TYPE}/etc/* ${BUILD_PATH}/etc/
+	echo "" >> ${BUILD_PATH}/root/.profile
+	echo "PS1=\"[\\H] \\w# \"" >> ${BUILD_PATH}/root/.profile
+	echo "export PS1" >> ${BUILD_PATH}/root/.profile
+	rm ${BUILD_PATH}/etc/localtime
+	ln -s /usr/share/zoneinfo/US/Pacific ${BUILD_PATH}/etc/localtime
+	return 0
+}
+
+buildimage() {
+	/root/resflash/build_resflash.sh -p ${PACKAGES_PATH} 4100 ${BUILD_PATH}
+}
+
+countdown() {
+	echo "Building a resflash image of type ${TYPE}"
+	echo "Starting in 5 seconds..."
+	sleep 5
+	return 0
+}
+
+usage() {
+	echo "Usage: gen-resflash-build [type]"
+	echo "Where type is generic or other specific system"
+	return 0
+}
+
+case $1 in 
+	generic|rtr1|rtr2)
+		export TYPE="${1}"
+		export VERS=59
+		export BUILD_PATH=/root/img-build-${TYPE}
+		export SETS_PATH=/root/${VERS}sets
+		export PACKAGES_PATH=/root/${VERS}packages
+		echo ${TYPE}
+		echo ${BUILD_PATH}
+		countdown
+		rm -r ${BUILD_PATH}
+		mkdir ${BUILD_PATH}
+		extractsets
+		buildimage
+	;;
+	current)
+		export TYPE=current
+		export VERS=60
+		export BUILD_PATH=/root/img-build-${TYPE}
+		export SETS_PATH=/root/${VERS}sets
+		export PACKAGES_PATH=/root/${VERS}packages
+		echo ${TYPE}
+		echo ${BUILD_PATH}
+		countdown
+		rm -r ${BUILD_PATH}
+		mkdir ${BUILD_PATH}
+		extractsets
+		buildimage
+	;;
+	*)
+		usage
+	;;
+esac
