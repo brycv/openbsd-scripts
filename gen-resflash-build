@@ -19,11 +19,14 @@
 ################################################################################
 #
 # Title: gen-resflash-build
-# Version: 0.5.1
+# Version: 0.5.2
 #
 ################################################################################
 #
-# This script is designed to build resflash images.
+# This script is designed to build resflash images. Your current working 
+# directory should be where you want to image(s) you are generating to be 
+# stored. This also obviously requires resflash which should be available 
+# at /root/resflash. This script is designed to be run as root for now.
 #
 ################################################################################
 
