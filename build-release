@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: build-release
-# Version: 0.6.3
+# Version: 0.7.0
 #
 ################################################################################
 #
@@ -62,8 +62,18 @@ buildall() {
 	echo ""
 	return 0
 }
+
+buildiso() {
+	export RELDIR=/usr/rel
+	export RELXDIR=/usr/rel
+	cd /usr/src/distrib/`uname -m`/iso && make
+	make install
+	unset RELDIR RELXDIR
+}
+
 finalrelease() {
 	cd /usr/src/distrib/sets && sh checkflist
+	buildiso
 	cd /usr/rel
 	ls -nT > index.txt
 	sha256 * > SHA256
