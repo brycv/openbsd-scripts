@@ -2,9 +2,9 @@ openbsd-scripts
 ===============
 
 This is my personal collection of simple OpenBSD shell scripts for various
-purposes. Right now, all three are designed to be run as root but this probably
-will change in the future. The scripts are rather simple and will be improved 
-as needed in the future.
+purposes. Right now all of the scripts are designed to be run as root but 
+this will probably change in the future. The scripts are rather simple and 
+will be improved as needed in the future.
 
 ### cvs_cur.sh
 
@@ -14,6 +14,17 @@ This script simply checks out the -current version of the OpenBSD source tree.
 
 This script simply checks out whatever version of the OpenBSD source tree is
 specified in the variables of the script.
+
+### build-current
+
+This scripts builds part or all of the system based on what is in /usr/src 
+and /usr/xenocara. This script could also be used to build OpenBSD-stable as 
+well. I use it to rebuild my OpenBSD-current system from source.
+
+### build-release
+
+This script builds a release based on what has already been built by some 
+other means such as build-current. The release ends up in /usr/rel.
 
 ### build_stable.sh
 
