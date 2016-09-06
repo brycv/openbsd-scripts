@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: gen-resflash-build
-# Version: 0.5.2
+# Version: 0.6.0
 #
 ################################################################################
 #
@@ -67,7 +67,7 @@ usage() {
 case $1 in 
 	generic|rtr1|rtr2)
 		export TYPE="${1}"
-		export VERS=59
+		export VERS=60
 		export BUILD_PATH=/root/img-build-${TYPE}
 		export SETS_PATH=/root/${VERS}sets
 		export PACKAGES_PATH=/root/${VERS}packages
