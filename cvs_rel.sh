@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: cvs_rel.sh
-# Version: 0.5.6
+# Version: 0.6.0
 #
 # This script simply checks out the src, xenocara, and ports trees for the
 # release version of OpenBSD set by REL_VERSION. This script is designed to 
@@ -35,7 +35,7 @@
 # run as root which may not be the best way of doing things.
 
 CVSROOT="anoncvs@cvs.anoncvs.com:/cvs"
-REL_VERSION="OPENBSD_5_8"
+REL_VERSION="OPENBSD_6_0"
 
 ################################################################################
 
