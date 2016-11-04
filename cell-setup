@@ -1,7 +1,7 @@
 #!/bin/sh
 
 f_cell_activate() {
-	ifconfig umb0 apn broadband class LTE up
+	ifconfig class LTE umb0 apn broadband up
 	sleep 1
 }
 
