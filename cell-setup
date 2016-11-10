@@ -1,24 +1,24 @@
 #!/bin/sh
 
 f_cell_activate() {
-	ifconfig class LTE umb0 apn broadband up
+	ifconfig umb0 class LTE apn broadband up
 	sleep 1
 }
 
 f_cell_status() {
-	_cell_status=""
-	_cell_status=`ifconfig umb0 | grep status | awk '{ print $2 }'`
-	if [ "$_cell_status" == "active" ]; then
-		cell_status=0
+	_CELL_STATUS=""
+	_CELL_STATUS=`ifconfig umb0 | grep status | awk '{ print $2 }'`
+	if [ "${_CELL_STATUS}" == "active" ]; then
+		CELL_STATUS=0
 	else
-		cell_status=1
+		CELL_STATUS=1
 	fi
-	return $cell_status
+	return ${CELL_STATUS}
 }
 
 f_set_route() {
-	cell_route=`ifconfig umb0 | grep inet | awk '{ print $2 }'`
-	route add -ifp umb0 default ${cell_route}
+	CELL_ROUTE=`ifconfig umb0 | grep inet | awk '{ print $2 }'`
+	route add -ifp umb0 default ${CELL_ROUTE}
 	if [ $? == 0 ]; then
 		echo "Default route added"
 	else
@@ -27,20 +27,17 @@ f_set_route() {
 }
 
 f_set_dns() {
-	cell_dns=`ifconfig umb0 | grep dns | awk '{ print $2 }'`
-	if [ "$cell_dns" == "" ]; then
+	CELL_DNS=`ifconfig umb0 | grep dns | awk '{ print $2 }'`
+	if [ "${CELL_DNS}" == "" ]; then
 		echo "Failure"
 	else
-		echo "nameserver ${cell_dns}" > /etc/resolv.conf
+		echo "nameserver ${CELL_DNS}" > /etc/resolv.conf
 		echo "lookup file bind" >> /etc/resolv.conf
 	fi
 }
 
 f_cell_activate
-check=1
-while [ $check -eq 1 ]
-do
-	sleep 1
+while true ; do
 	f_cell_status
 	if [ $? == 0 ]; then
 		f_set_route
