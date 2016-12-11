@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: build-release
-# Version: 0.7.0
+# Version: 0.8.0
 #
 ################################################################################
 #
@@ -28,7 +28,7 @@
 # script also assumes it is being run as root. This is probably not the best
 # practice and some changes should be made in the future to change this.
 
-export DESTDIR=/usr/dest
+export DESTDIR=/dest
 export RELEASEDIR=/usr/rel
 mkdir -p ${DESTDIR} ${RELEASEDIR}
 
