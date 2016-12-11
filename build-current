@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: build-current
-# Version: 0.6.6
+# Version: 0.7.0
 #
 ################################################################################
 #
@@ -33,14 +33,16 @@ KERNEL=GENERIC.MP
 TIMESTAMP=`date +%Y%m%d%H%M%S`
 
 buildkernel() {
-	cd /usr/src/sys/arch/amd64/conf
-	/usr/sbin/config ${KERNEL} 2>&1
-	cd /usr/src/sys/arch/amd64/compile/${KERNEL}
-	make clean 2>&1
+	cd /usr/src/sys/arch/`uname -m`/compile/${KERNEL}
+	make obj 2>&1
 	if [ $? -ne 0 ]; then
 		break
 	fi
-	make all 2>&1
+	make config 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
+	make 2>&1
 	if [ $? -ne 0 ]; then
 		break
 	fi
@@ -55,10 +57,11 @@ buildkernel() {
 }
 
 builduserland() {
-	rm -rf /usr/obj/*
-	cd /usr/src
-	make obj 2>&1
-	cd /usr/src/etc && env DESTDIR=/ make distrib-dirs 2>&1
+	#rm -rf /usr/obj/*
+	cd /usr/src && make obj 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
 	cd /usr/src && make build 2>&1
 	if [ $? -ne 0 ]; then
 		break
