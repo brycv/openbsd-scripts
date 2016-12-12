@@ -65,7 +65,7 @@ usage() {
 }
 
 case $1 in 
-	generic|rtr1|rtr2)
+	generic|rtr1|rtr2|airport1|airport2)
 		export TYPE="${1}"
 		export VERS=60
 		export BUILD_PATH=/root/img-build-${TYPE}
