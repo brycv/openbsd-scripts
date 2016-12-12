@@ -46,6 +46,7 @@ buildrelease() {
 
 buildxrelease() {
 	cd /usr/xenocara && make release
+	cd /usr/xenocara && make checkdist
 	echo ""
 	echo "     xenocara release built"
 	echo ""
