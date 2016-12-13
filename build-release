@@ -31,6 +31,8 @@
 export DESTDIR=/dest
 export RELEASEDIR=/usr/rel
 mkdir -p ${DESTDIR} ${RELEASEDIR}
+chown build:wobj /dest
+chmod 700 /dest
 
 ################################################################################
 
@@ -91,10 +93,13 @@ case $1 in
 		buildall
 		finalrelease
 	;;
+	iso)
+		buildiso
+	;;
 	finish)
 		finalrelease	
 	;;
 	*)
-		echo "Usage: build-release release|xrelease|all"
+		echo "Usage: build-release release|xrelease|iso|finish|all"
 	;;
 esac
