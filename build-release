@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: build-release
-# Version: 0.8.6
+# Version: 0.8.7
 #
 ################################################################################
 #
@@ -42,6 +42,7 @@ TIMESTAMP=`date +%Y%m%d%H%M%S`
 
 buildrelease() {
 	cd /usr/src/etc && make release
+	cd /usr/src/distrib/sets && sh checkflist
 	echo ""
 	echo "     release built"
 	echo ""
@@ -77,7 +78,6 @@ buildiso() {
 }
 
 finalrelease() {
-	cd /usr/src/distrib/sets && sh checkflist
 	buildiso
 	cd /usr/rel
 	ls -nT > index.txt
