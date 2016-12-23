@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: build-release
-# Version: 0.8.7
+# Version: 0.8.8
 #
 ################################################################################
 #
@@ -28,13 +28,13 @@
 # script also assumes it is being run as root. This is probably not the best
 # practice and some changes should be made in the future to change this.
 
-export DESTDIR=/dest
+export DESTDIR=/dest/dest
 export RELEASEDIR=/usr/rel
 mkdir -p ${DESTDIR} ${RELEASEDIR}
-chown build:wobj /dest
-chmod 700 /dest
-chown build:wobj /usr/rel
-chmod 775 /usr/rel
+chown build /dest
+chmod 775 /dest
+chown build ${RELEASEDIR}
+chmod 700 ${RELEASEDIR}
 
 ################################################################################
 
