@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: build-release
-# Version: 0.8.8
+# Version: 0.8.9
 #
 ################################################################################
 #
@@ -32,7 +32,7 @@ export DESTDIR=/dest/dest
 export RELEASEDIR=/usr/rel
 mkdir -p ${DESTDIR} ${RELEASEDIR}
 chown build /dest
-chmod 775 /dest
+chmod 700 /dest
 chown build ${RELEASEDIR}
 chmod 700 ${RELEASEDIR}
 
