@@ -42,26 +42,26 @@ export CVSROOT
 case $1 in
 	all)
 		cd /usr
-		env CVSROOT=${CVSROOT} cvs -q get -P src
-		env CVSROOT=${CVSROOT} cvs -q get -P ports
-		env CVSROOT=${CVSROOT} cvs -q get -P xenocara
-		env CVSROOT=${CVSROOT} cvs -q get -P www
+		nice -n 20 env CVSROOT=${CVSROOT} cvs -q get -P src
+		nice -n 20 env CVSROOT=${CVSROOT} cvs -q get -P ports
+		nice -n 20 env CVSROOT=${CVSROOT} cvs -q get -P xenocara
+		nice -n 20 env CVSROOT=${CVSROOT} cvs -q get -P www
 	;;
 	src)
 		cd /usr
-		env CVSROOT=${CVSROOT} cvs -q get -P src
+		nice -n 20 env CVSROOT=${CVSROOT} cvs -q get -P src
 	;;
 	ports)
 		cd /usr
-		env CVSROOT=${CVSROOT} cvs -q get -P ports
+		nice -n 20 env CVSROOT=${CVSROOT} cvs -q get -P ports
 	;;
 	xenocara)
 		cd /usr
-		env CVSROOT=${CVSROOT} cvs -q get -P xenocara
+		nice -n 20 env CVSROOT=${CVSROOT} cvs -q get -P xenocara
 	;;
 	www)
 		cd /usr
-		env CVSROOT=${CVSROOT} cvs -q get -P www
+		nice -n 20 env CVSROOT=${CVSROOT} cvs -q get -P www
 	;;
 	*)
 		echo "Usage: all|src|ports|xenocara|www"
