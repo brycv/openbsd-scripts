@@ -2,7 +2,7 @@
 #
 ################################################################################
 #
-# Copyright (c) 2016, Bryan Vyhmeister <bryan@bsdjournal.net>
+# Copyright (c) 2016-2017, Bryan Vyhmeister <bryan@bsdjournal.net>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: gen-resflash-build
-# Version: 0.6.0
+# Version: 0.7.0
 #
 ################################################################################
 #
@@ -67,7 +67,7 @@ usage() {
 case $1 in 
 	generic|rtr1|rtr2|airport1|airport2)
 		export TYPE="${1}"
-		export VERS=60
+		export VERS=61
 		export BUILD_PATH=/root/img-build-${TYPE}
 		export SETS_PATH=/root/${VERS}sets
 		export PACKAGES_PATH=/root/${VERS}packages
@@ -81,9 +81,23 @@ case $1 in
 	;;
 	current)
 		export TYPE=current
-		export VERS=60
+		export VERS=61
 		export BUILD_PATH=/root/img-build-${TYPE}
 		export SETS_PATH=/root/${VERS}sets
+		export PACKAGES_PATH=/root/${VERS}packages
+		echo ${TYPE}
+		echo ${BUILD_PATH}
+		countdown
+		rm -r ${BUILD_PATH}
+		mkdir ${BUILD_PATH}
+		extractsets
+		buildimage
+	;;
+	octeon)
+		export TYPE=octeon
+		export VERS=61
+		export BUILD_PATH=/root/img-build-${TYPE}
+		export SETS_PATH=/root/${VERS}octeon
 		export PACKAGES_PATH=/root/${VERS}packages
 		echo ${TYPE}
 		echo ${BUILD_PATH}
