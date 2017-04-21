@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: gen-resflash-build
-# Version: 0.7.1
+# Version: 0.7.2
 #
 ################################################################################
 #
@@ -36,7 +36,12 @@ extractsets() {
 		tar -C ${BUILD_PATH} -zxvphf ${SETS_PATH}/${SETS}${VERS}.tgz
 		tar -C ${BUILD_PATH} -zxvphf ${BUILD_PATH}/var/sysmerge/etc.tgz
 	done
-	cp ${SETS_PATH}/bsd.mp ${BUILD_PATH}/bsd
+	if [ "${TYPE}" == "octeon" ]; then
+		cp ${SETS_PATH}/bsd.mp ${BUILD_PATH}/bsd.d
+		cp ${SETS_PATH}/bsd.mp ${BUILD_PATH}/bsd.e
+	else
+		cp ${SETS_PATH}/bsd.mp ${BUILD_PATH}/bsd
+	fi
 	cp -R /root/resflash-files/${TYPE}/root/.ssh ${BUILD_PATH}/root/
 	cp /root/resflash-files/${TYPE}/etc/* ${BUILD_PATH}/etc/
 	echo "" >> ${BUILD_PATH}/root/.profile
