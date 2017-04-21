@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: gen-resflash-build
-# Version: 0.7.0
+# Version: 0.7.1
 #
 ################################################################################
 #
@@ -49,6 +49,10 @@ extractsets() {
 
 buildimage() {
 	/root/resflash/build_resflash.sh -p ${PACKAGES_PATH} 4100 ${BUILD_PATH}
+}
+
+buildimage_serial() {
+	/root/resflash/build_resflash.sh -s 115200 -p ${PACKAGES_PATH} 4100 ${BUILD_PATH}
 }
 
 countdown() {
@@ -105,7 +109,7 @@ case $1 in
 		rm -r ${BUILD_PATH}
 		mkdir ${BUILD_PATH}
 		extractsets
-		buildimage
+		buildimage_serial
 	;;
 	*)
 		usage
