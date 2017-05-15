@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: snap
-# Version: 0.6.0
+# Version: 0.6.1
 #
 ################################################################################
 #
@@ -60,12 +60,12 @@ binupgrade() {
 		tar -C / -zxphf ${snap}/${set}${version}.tgz
 	done
 	echo "Updated sets installed"
-	return 1
+	return 0
 }
 
 ftpsnap() {
 	ftp -ia ftp://ftp.openbsd.org/pub/OpenBSD/snapshots/`uname -m`/*
-	return 1
+	return 0
 }
 
 usage() {
