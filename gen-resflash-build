@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: gen-resflash-build
-# Version: 0.7.2
+# Version: 0.7.3
 #
 ################################################################################
 #
@@ -92,8 +92,8 @@ case $1 in
 		export TYPE=current
 		export VERS=61
 		export BUILD_PATH=/root/img-build-${TYPE}
-		export SETS_PATH=/root/${VERS}sets
-		export PACKAGES_PATH=/root/${VERS}packages
+		export SETS_PATH=/root/${VERS}current
+		export PACKAGES_PATH=/root/${VERS}cur-packages
 		echo ${TYPE}
 		echo ${BUILD_PATH}
 		countdown
