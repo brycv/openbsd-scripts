@@ -39,6 +39,8 @@ full release in /usr/rel.
 
 ### snap
 
+SINCE KARL THIS SCRIPT IS NOT RECOMMENDED. Upgrade via bsd.rd instead.
+
 This script is intended to be run from /bin/root with ~/bin appearing in PATH.
 It provides a quick means to download the latest OpenBSD-current snapshot and
 then install that snapshot to your system. This is not designed to be used with
