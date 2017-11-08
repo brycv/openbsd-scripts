@@ -2,7 +2,7 @@
 #
 ################################################################################
 #
-# Copyright (c) 2016, Bryan Vyhmeister <bryan@bsdjournal.net>
+# Copyright (c) 2016-2017, Bryan Vyhmeister <bryan@bsdjournal.net>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: cell-setup
-# Version: 0.5.0
+# Version: 0.6.0
 #
 ################################################################################
 #
@@ -28,10 +28,17 @@
 # DNS server.
 #
 ################################################################################
+#
+# Set the APN variable to the proper variable for your provider.
+# 'broadband' is the correct value for AT&T Wireless in the United States.
+
+APN="broadband"
+
+################################################################################
 
 
 f_cell_activate() {
-	ifconfig umb0 class LTE apn broadband up
+	ifconfig umb0 class LTE apn ${APN} up
 	sleep 1
 }
 
