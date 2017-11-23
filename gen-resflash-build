@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: gen-resflash-build
-# Version: 0.7.4
+# Version: 0.7.5
 #
 ################################################################################
 #
@@ -80,7 +80,7 @@ usage() {
 case $1 in 
 	generic|rtr1|rtr2|airport1|airport2)
 		export TYPE="${1}"
-		export VERS=61
+		export VERS=62
 		export BUILD_PATH=/root/img-build-${TYPE}
 		export SETS_PATH=/root/${VERS}sets
 		export PACKAGES_PATH=/root/${VERS}packages
@@ -94,7 +94,7 @@ case $1 in
 	;;
 	current)
 		export TYPE=current
-		export VERS=61
+		export VERS=62
 		export BUILD_PATH=/root/img-build-${TYPE}
 		export SETS_PATH=/root/${VERS}current
 		export PACKAGES_PATH=/root/${VERS}cur-packages
@@ -108,7 +108,7 @@ case $1 in
 	;;
 	octeon)
 		export TYPE=octeon
-		export VERS=61
+		export VERS=62
 		export BUILD_PATH=/root/img-build-${TYPE}
 		export SETS_PATH=/root/${VERS}octeon
 		export PACKAGES_PATH=/root/${VERS}packages
