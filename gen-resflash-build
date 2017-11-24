@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: gen-resflash-build
-# Version: 0.7.5
+# Version: 0.7.6
 #
 ################################################################################
 #
@@ -37,8 +37,8 @@ extractsets() {
 		tar -C ${BUILD_PATH} -zxvphf ${BUILD_PATH}/var/sysmerge/etc.tgz
 	done
 	if [ "${TYPE}" == "octeon" ]; then
-		cp ${SETS_PATH}/bsd.mp ${BUILD_PATH}/bsd.d
-		cp ${SETS_PATH}/bsd.mp ${BUILD_PATH}/bsd.e
+		cp ${SETS_PATH}/bsd.d ${BUILD_PATH}/bsd.d
+		cp ${SETS_PATH}/bsd.e ${BUILD_PATH}/bsd.e
 	else
 		cp ${SETS_PATH}/bsd.mp ${BUILD_PATH}/bsd
 	fi
