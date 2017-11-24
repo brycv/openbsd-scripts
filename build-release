@@ -2,7 +2,7 @@
 #
 ################################################################################
 #
-# Copyright (c) 2013-2016, Bryan Vyhmeister <bryan@bsdjournal.net>
+# Copyright (c) 2013-2017, Bryan Vyhmeister <bryan@bsdjournal.net>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -19,16 +19,15 @@
 ################################################################################
 #
 # Title: build-release
-# Version: 0.8.9
+# Version: 0.9.0
 #
 ################################################################################
 #
 # Variables for release building. This script assumes you have already run the
-# build-current or build stable some other way. As with build-release, this
-# script also assumes it is being run as root. This is probably not the best
-# practice and some changes should be made in the future to change this.
+# build-current or build-stable scripts. As with build-release, this
+# script also assumes it is being run as root.
 
-export DESTDIR=/dest/dest
+export DESTDIR=/dest/destdir
 export RELEASEDIR=/usr/rel
 mkdir -p ${DESTDIR} ${RELEASEDIR}
 chown build /dest
@@ -72,7 +71,7 @@ buildall() {
 buildiso() {
 	export RELDIR=/usr/rel
 	export RELXDIR=/usr/rel
-	cd /usr/src/distrib/`uname -m`/iso && make
+	cd /usr/src/distrib/$(machine)/iso && make
 	make install
 	unset RELDIR RELXDIR
 }
