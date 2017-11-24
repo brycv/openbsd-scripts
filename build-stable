@@ -1,0 +1,138 @@
+#!/bin/sh
+#
+################################################################################
+#
+# Copyright (c) 2013-2017, Bryan Vyhmeister <bryan@bsdjournal.net>
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+# REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+# AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+# INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+# LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+# OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+# PERFORMANCE OF THIS SOFTWARE.
+#
+################################################################################
+#
+# Title: build-stable
+# Version: 0.7.0
+#
+################################################################################
+#
+# This script is designed to rebuild your current system with a GENERIC.MP 
+# kernel and/or then rebuild the entire userland and/or xenocara.
+
+KERNEL=GENERIC.MP
+
+################################################################################
+
+TIMESTAMP=`date +%Y%m%d%H%M%S`
+
+buildkernel() {
+	cd /usr/src/sys/arch/`uname -m`/compile/${KERNEL}
+	make obj 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
+	make config 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
+	make 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
+	make install 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
+	echo ""
+	echo "     kernel built and installed"
+	echo ""
+	return 0
+}
+
+builduserland() {
+	#rm -rf /usr/obj/*
+	cd /usr/src && make obj 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
+	cd /usr/src && make build 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
+	echo ""
+	echo "     userland built and installed"
+	echo ""
+	return 0
+}
+
+buildxenocara() {
+	cd /usr/xenocara
+	rm -rf /usr/xobj/*
+	make bootstrap 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
+	make obj 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
+	make build 2>&1
+	if [ $? -ne 0 ]; then
+		break
+	fi
+	echo ""
+	echo "     xenocara built and installed"
+	echo ""
+	return 0
+}
+
+buildall() {
+	buildkernel
+	builduserland
+	buildxenocara
+	echo ""
+	echo "     Build of kernel, userland, and xenocara"
+	echo "     Started: ${TIMESTAMP}"
+	echo "     Completed: `date +%Y%m%d%H%M%S`"
+	echo ""
+	return 0
+}
+
+buildboth() {
+	buildkernel
+	builduserland
+	echo ""
+	echo "     Build of kernel and userland"
+	echo "     Started: ${TIMESTAMP}"
+	echo "     Completed: `date +%Y%m%d%H%M%S`"
+	echo ""
+	return 0
+}
+
+case $1 in
+	kernel)
+		buildkernel
+	;;
+	userland)
+		builduserland
+	;;
+	both)
+		buildboth
+	;;
+	xenocara)
+		buildxenocara
+	;;
+	all)
+		buildall
+	;;
+	*)
+		echo "Usage: build-stable kernel|userland|both|xenocara|all"
+	;;
+esac
