@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: gen-resflash-build
-# Version: 0.7.6
+# Version: 0.7.7
 #
 ################################################################################
 #
@@ -49,10 +49,6 @@ extractsets() {
 	echo "export PS1" >> ${BUILD_PATH}/root/.profile
 	rm ${BUILD_PATH}/etc/localtime
 	ln -s /usr/share/zoneinfo/US/Pacific ${BUILD_PATH}/etc/localtime
-	if [ "${TYPE}" == "octeon" ]; then
-		cd ${BUILD_PATH}/dev
-		sh MAKEDEV all	
-	fi
 	return 0
 }
 
