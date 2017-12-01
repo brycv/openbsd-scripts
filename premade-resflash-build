@@ -1,0 +1,99 @@
+#!/bin/sh
+#
+################################################################################
+#
+# Copyright (c) 2016-2017, Bryan Vyhmeister <bryan@bsdjournal.net>
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+# REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+# AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+# INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+# LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+# OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+# PERFORMANCE OF THIS SOFTWARE.
+#
+################################################################################
+#
+# Title: premade-resflash-build
+# Version: 0.5.0
+#
+################################################################################
+#
+# This script is designed to build resflash images. Your current working 
+# directory should be where you want to image(s) you are generating to be 
+# stored. This also obviously requires resflash which should be available 
+# at /root/resflash. This script is designed to be run as root for now.
+#
+################################################################################
+
+extractsets() {
+	for SETS in base man
+	do
+		tar -C ${BUILD_PATH} -zxvphf ${SETS_PATH}/${SETS}${VERS}.tgz
+		tar -C ${BUILD_PATH} -zxvphf ${BUILD_PATH}/var/sysmerge/etc.tgz
+	done
+	if [ "${TYPE}" == "octeon" ]; then
+		cp ${SETS_PATH}/bsd.d ${BUILD_PATH}/bsd.d
+		cp ${SETS_PATH}/bsd.e ${BUILD_PATH}/bsd.e
+	else
+		cp ${SETS_PATH}/bsd.mp ${BUILD_PATH}/bsd
+	fi
+	return 0
+}
+
+buildimage() {
+	/root/resflash/build_resflash.sh 1906 ${BUILD_PATH}
+}
+
+buildimage_serial() {
+	/root/resflash/build_resflash.sh -n -s 115200 1906 ${BUILD_PATH}
+}
+
+countdown() {
+	echo "Building a resflash image of type ${TYPE}"
+	echo "Starting in 5 seconds..."
+	sleep 5
+	return 0
+}
+
+usage() {
+	echo "Usage: premade-resflash-build [type]"
+	echo "Where type is amd64 or octeon"
+	return 0
+}
+
+case $1 in 
+	amd64)
+		export TYPE="${1}"
+		export VERS=62
+		export BUILD_PATH=/home/root/img-build-${TYPE}
+		export SETS_PATH=/home/root/${VERS}sets
+		echo ${TYPE}
+		echo ${BUILD_PATH}
+		countdown
+		rm -r ${BUILD_PATH}
+		mkdir ${BUILD_PATH}
+		extractsets
+		buildimage
+	;;
+	octeon)
+		export TYPE=octeon
+		export VERS=62
+		export BUILD_PATH=/build/octeon
+		export SETS_PATH=/home/root/octeon-sets
+		echo ${TYPE}
+		echo ${BUILD_PATH}
+		countdown
+		rm -r ${BUILD_PATH}
+		mkdir ${BUILD_PATH}
+		extractsets
+		buildimage_serial
+	;;
+	*)
+		usage
+	;;
+esac
