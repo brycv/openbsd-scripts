@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: gen-resflash-build
-# Version: 0.7.7
+# Version: 0.7.8
 #
 ################################################################################
 #
@@ -60,6 +60,9 @@ buildimage_serial() {
 	/root/resflash/build_resflash.sh -s 115200 -p ${PACKAGES_PATH} 4100 ${BUILD_PATH}
 }
 
+buildimage_octeon() {
+	/root/resflash/build_resflash.sh -n -s 115200 -p ${PACKAGES_PATH} 4100 ${BUILD_PATH}
+}
 countdown() {
 	echo "Building a resflash image of type ${TYPE}"
 	echo "Starting in 5 seconds..."
@@ -105,16 +108,16 @@ case $1 in
 	octeon)
 		export TYPE=octeon
 		export VERS=62
-		export BUILD_PATH=/root/img-build-${TYPE}
-		export SETS_PATH=/root/${VERS}octeon
-		export PACKAGES_PATH=/root/${VERS}packages
+		export BUILD_PATH=/home/root/octeon/img-build
+		export SETS_PATH=/home/root/octeon/sets
+		export PACKAGES_PATH=/home/root/octeon/packages
 		echo ${TYPE}
 		echo ${BUILD_PATH}
 		countdown
 		rm -r ${BUILD_PATH}
 		mkdir ${BUILD_PATH}
 		extractsets
-		buildimage_serial
+		buildimage_octeon
 	;;
 	*)
 		usage
