@@ -19,14 +19,15 @@
 ################################################################################
 #
 # Title: gen-resflash-build
-# Version: 0.7.8
+# Version: 0.8.0
 #
 ################################################################################
 #
 # This script is designed to build resflash images. Your current working 
 # directory should be where you want to image(s) you are generating to be 
-# stored. This also obviously requires resflash which should be available 
-# at /root/resflash. This script is designed to be run as root for now.
+# stored. This also requires resflash which is expected to be available at 
+# /root/resflash. It is also expected that /build be available but only for 
+# octeon builds. This script is designed to be run as root.
 #
 ################################################################################
 
@@ -87,7 +88,7 @@ case $1 in
 		echo ${BUILD_PATH}
 		countdown
 		rm -r ${BUILD_PATH}
-		mkdir ${BUILD_PATH}
+		mkdir -p ${BUILD_PATH}
 		extractsets
 		buildimage
 	;;
@@ -101,21 +102,21 @@ case $1 in
 		echo ${BUILD_PATH}
 		countdown
 		rm -r ${BUILD_PATH}
-		mkdir ${BUILD_PATH}
+		mkdir -p ${BUILD_PATH}
 		extractsets
 		buildimage
 	;;
 	octeon)
 		export TYPE=octeon
 		export VERS=62
-		export BUILD_PATH=/home/root/octeon/img-build
+		export BUILD_PATH=/build/octeon/img-build
 		export SETS_PATH=/home/root/octeon/sets
 		export PACKAGES_PATH=/home/root/octeon/packages
 		echo ${TYPE}
 		echo ${BUILD_PATH}
 		countdown
 		rm -r ${BUILD_PATH}
-		mkdir ${BUILD_PATH}
+		mkdir -p ${BUILD_PATH}
 		extractsets
 		buildimage_octeon
 	;;
