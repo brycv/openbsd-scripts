@@ -2,7 +2,7 @@
 #
 ################################################################################
 #
-# Copyright (c) 2016-2017, Bryan Vyhmeister <bryan@bsdjournal.net>
+# Copyright (c) 2016-2018, Bryan Vyhmeister <bryan@bsdjournal.net>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -19,7 +19,7 @@
 ################################################################################
 #
 # Title: gen-resflash-build
-# Version: 0.8.0
+# Version: 0.8.1
 #
 ################################################################################
 #
@@ -80,7 +80,7 @@ usage() {
 case $1 in 
 	generic|rtr1|rtr2|airport1|airport2)
 		export TYPE="${1}"
-		export VERS=62
+		export VERS=63
 		export BUILD_PATH=/root/img-build-${TYPE}
 		export SETS_PATH=/root/${VERS}sets
 		export PACKAGES_PATH=/root/${VERS}packages
@@ -94,7 +94,7 @@ case $1 in
 	;;
 	current)
 		export TYPE=current
-		export VERS=62
+		export VERS=63
 		export BUILD_PATH=/root/img-build-${TYPE}
 		export SETS_PATH=/root/${VERS}current
 		export PACKAGES_PATH=/root/${VERS}cur-packages
@@ -108,7 +108,7 @@ case $1 in
 	;;
 	octeon)
 		export TYPE=octeon
-		export VERS=62
+		export VERS=63
 		export BUILD_PATH=/build/octeon/img-build
 		export SETS_PATH=/home/root/octeon/sets
 		export PACKAGES_PATH=/home/root/octeon/packages
